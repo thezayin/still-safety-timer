@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678611847727",
+    "project_id": "safety-net-android",
+    "storage_bucket": "safety-net-android.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678611847727:android:ace68f955cf823f17614da",
+        "android_client_info": {
+          "package_name": "com.thezayin.safetynet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbupTbqldvYQvS7APcd8bR596OB_ZeUn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

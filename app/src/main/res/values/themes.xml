@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.Still.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/navy_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_still_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.SafetyNet</item>
+    </style>
+
+    <style name="Theme.SafetyNet" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/navy_dark</item>
+    </style>
+</resources>

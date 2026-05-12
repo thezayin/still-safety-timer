@@ -1,0 +1,79 @@
+package com.thezayin.safetynet.core.ui.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.thezayin.safetynet.core.ui.theme.SafetyNetTheme
+@Composable
+fun GhostButton(
+    label: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    isCritical: Boolean = false
+) {
+    val haptic = LocalHapticFeedback.current
+    val contentColor = if (isCritical) MaterialTheme.colorScheme.error
+    else MaterialTheme.colorScheme.onBackground
+
+    Box(
+        modifier = modifier
+            .height(64.dp)
+            .clip(RoundedCornerShape(100.dp))
+            .background(contentColor.copy(alpha = 0.03f))
+            .clickable(
+                onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                    onClick()
+                },
+                role = Role.Button
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = label.uppercase(),
+            color = contentColor.copy(alpha = 0.8f),
+            style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFF151921)
+@Composable
+private fun GhostButtonPreview() {
+    SafetyNetTheme {
+        Column(
+            modifier = Modifier.padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            GhostButton(
+                label = "Standard Ghost",
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+            GhostButton(
+                label = "Critical Action",
+                onClick = {},
+                isCritical = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+            GhostButton(
+                label = "Half Width",
+                onClick = {},
+                modifier = Modifier.fillMaxWidth(0.5f)
+            )
+        }
+    }
+}

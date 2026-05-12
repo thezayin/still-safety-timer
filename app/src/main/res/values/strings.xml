@@ -1,0 +1,188 @@
+<resources>
+    <string name="app_name">Still</string>
+
+    <string name="splash_slogan">Stay Still. Stay Safe.</string>
+    <string name="onboarding_next">Continue</string>
+    <string name="onboarding_start">Get Started</string>
+
+    <string name="timer_status_remaining">Remaining</string>
+    <string name="timer_status_confirm_safety">Confirm Safety</string>
+
+    <!-- Onboarding: Slides (Philosophy) -->
+    <string name="onboarding_title_philosophy">The Power of Stillness</string>
+    <string name="onboarding_desc_philosophy">Still is designed to keep you safe by ensuring you are okay. If you don\'t check in, we take action.</string>
+
+    <string name="timer_warning_title">Safety Limited</string>
+    <string name="timer_warning_desc">Alerts may be delayed. Tap to fix.</string>
+
+    <string name="battery_dialog_title">Secure Your Safety Net</string>
+    <string name="battery_dialog_desc">Without this setting, your phone might delay sending your SOS if the screen is off.\n\nLet\'s go to your settings to allow Safety Net to run in the background.</string>
+    <string name="battery_dialog_confirm">Go to Settings</string>
+    <string name="battery_dialog_cancel">Cancel</string>
+
+    <string name="onboarding_title_safety">Your Safety Net</string>
+    <string name="onboarding_desc_safety">Set your timer, live your life. If the timer runs out without a word from you, your emergency contacts are notified instantly.</string>
+
+    <!-- Onboarding: Permissions -->
+    <string name="perm_title">Access Required</string>
+    <string name="perm_desc">To protect you in the background and send alerts, Still needs specific system permissions.</string>
+    <string name="perm_notifications_label">Notifications</string>
+    <string name="perm_notifications_desc">Required to show the timer and check-in prompts.</string>
+    <string name="perm_location_label">Location</string>
+    <string name="perm_location_desc">Used only during emergencies to help responders find you.</string>
+    <string name="perm_button_grant">Grant Access</string>
+
+    <!-- Onboarding: Consent (The Contract) -->
+    <string name="consent_summary">I understand that Still is a tool to assist my safety. I am responsible for maintaining my device\'s battery and connectivity.</string>
+    <string name="consent_checkbox">I agree to the terms and understand the system logic.</string>
+    <string name="consent_button_finish">I am Ready</string>
+
+    <!-- Navigation / Common -->
+    <string name="btn_next">Next</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_skip">Skip</string>
+
+    <string name="consent_title">THE SAFETY\nCONTRACT</string>
+    <string name="consent_description">Stillness is a commitment to your own safety. Please acknowledge our shared protocols.</string>
+    <string name="consent_bullet_location">Encrypted and private location data.</string>
+    <string name="consent_bullet_prompts">Minimalist check-in prompts.</string>
+    <string name="consent_bullet_notifications">Secure emergency notifications.</string>
+    <string name="consent_checkbox_label">I understand and accept these protocols.</string>
+    <string name="consent_button_saving">SAVING...</string>
+    <string name="consent_button_enter">ENTER THE STILLNESS</string>
+
+
+    <!-- Bullet Points -->
+    <string name="consent_bullet_data">Your location and status data remain strictly encrypted and private to your device.</string>
+    <string name="consent_bullet_safety">The app will prompt for check-ins only when your specified safety timer concludes.</string>
+    <string name="consent_bullet_alert">Emergency contacts will be notified via secure channels only if you fail to respond to check-ins.</string>
+
+    <!-- Interaction -->
+    <string name="consent_button_text">ENTER THE STILLNESS</string>
+
+    <!-- Error States -->
+    <string name="error_consent_persistence">We were unable to save your preference. Please try again.</string>
+    <string name="permission_button">UNLOCK SYSTEM</string>
+
+    <!-- Permission Phase -->
+    <string name="permission_title">SYSTEM\nPROTOCOLS</string>
+    <string name="permission_description">To maintain your safety net, we require two vital system clearances.</string>
+
+    <!-- Permission Item Titles -->
+    <string name="permission_notif_title">CRITICAL ALERTS</string>
+    <string name="permission_alarm_title">PRECISION TIMING</string>
+
+    <!-- CTA -->
+    <string name="permission_button_text">UNLOCK SYSTEM</string>
+
+    <!-- Slide 1: Philosophy -->
+    <string name="slide_1_title">THE ART OF\nSTILLNESS</string>
+    <string name="slide_1_desc">True safety isn\'t found in noise. It\'s found in the quiet assurance that someone is watching over you.</string>
+
+    <!-- Slide 2: The Timer -->
+    <string name="slide_2_title">PRECISION\nPROTECTION</string>
+    <string name="slide_2_desc">Set your safety interval. If you don\'t check in, your protocols activate instantly. No delays, no doubt.</string>
+
+    <!-- Slide 3: The Circle -->
+    <string name="slide_3_title">YOUR INNER\nCIRCLE</string>
+    <string name="slide_3_desc">Connect your most trusted contacts. We bridge the gap between your silence and their peace of mind.</string>
+
+    <string name="profile_name_question">What is your\nFull Name?</string>
+    <string name="profile_name_subtitle">Used for official safety logs and reports.</string>
+    <string name="profile_name_placeholder">Your Name</string>
+    <string name="profile_name_hint">Please enter at least 2 letters.</string>
+
+    <string name="profile_contact_question">Who is your\nCircle?</string>
+    <string name="profile_contact_subtitle">The person who will be notified in an emergency.</string>
+    <string name="profile_contact_placeholder">Contact Name</string>
+    <string name="profile_contact_hint">Please enter your contact\'s full name.</string>
+
+    <string name="profile_email_question">What is their\nEmail?</string>
+    <string name="profile_email_subtitle">We\'ll send secure alerts to this address.</string>
+    <string name="profile_email_placeholder">Contact Email</string>
+    <string name="profile_email_hint">A valid email ensures alerts arrive safely.</string>
+
+    <string name="profile_review_question">Review\nYour Circle</string>
+    <string name="profile_review_subtitle">Ensure this information is correct for emergency alerts.</string>
+
+    <string name="profile_btn_continue">Continue</string>
+    <string name="profile_btn_confirm">Confirm &amp; Complete</string>
+
+    <string name="status_ready">READY</string>
+    <string name="status_safety_active">SAFETY ACTIVE</string>
+    <string name="status_check_in_soon">CHECK IN SOON</string>
+    <string name="status_urgent">URGENT</string>
+    <string name="status_dispatching_sos">DISPATCHING SOS</string>
+    <string name="status_alerts_sent">ALERTS SENT</string>
+
+    <!-- Timer Actions -->
+    <string name="action_start_timer">START TIMER</string>
+    <string name="action_abort_sos">ABORT SOS DISPATCH</string>
+    <string name="action_dismiss_alerts">DISMISS ALERTS</string>
+
+    <!-- Warnings & Dialogs -->
+    <string name="warning_battery_saver">WARNING: Battery Saver is ON. Alarms may fail. Please disable it.</string>
+
+    <string name="dialog_abort_title">Deactivate Safety Timer?</string>
+    <string name="dialog_abort_message">If you stop the timer, your emergency contact will not be notified if you fail to check in. Are you sure you are safe?</string>
+    <string name="dialog_action_yes_deactivate">Yes, Deactivate</string>
+    <string name="dialog_action_cancel">Cancel</string>
+
+    <!-- Timer Status Badges -->
+    <string name="status_idle">I D L E</string>
+    <string name="status_armed">S Y S T E M   A R M E D</string>
+    <string name="status_warning">C H E C K   I N   D U E</string>
+    <string name="status_critical">C R I T I C A L   W I N D O W</string>
+    <string name="status_abort">P R O T O C O L   I N I T I A T E D</string>
+    <string name="status_expired">A L E R T S   S E N T</string>
+
+    <!-- Timer Actions -->
+    <string name="action_begin_stillness">Begin Stillness</string>
+    <string name="action_check_in">Check In</string>
+    <string name="action_i_am_safe">I Am Safe</string>
+    <string name="action_deactivate_system">DEACTIVATE SYSTEM</string>
+
+    <!-- Aura Orb Text -->
+    <string name="orb_remaining">REMAINING</string>
+    <string name="orb_confirm_safety">CONFIRM SAFETY</string>
+
+    <!-- Streak -->
+    <string name="streak_days_of_stillness">%1$d DAYS OF STILLNESS</string>
+
+    <!-- Battery Warning -->
+    <string name="warning_battery_saver_timer">System alarms may fail while Battery Saver is active.</string>
+    <!-- Slide UI -->
+    <string name="slide_button_next">NEXT</string>
+    <string name="slide_button_get_started">BEGIN SETUP</string>
+    <string name="settings_section_identity">Your Identity</string>
+    <string name="settings_section_guardian">The Guardian</string>
+    <string name="settings_section_pulse">Safety Pulse</string>
+    <string name="settings_section_shield">Shield Readiness</string>
+    <string name="settings_section_support">Support &amp; Legal</string>
+
+    <string name="settings_label_name">Name</string>
+    <string name="settings_label_contact_name">Contact Name</string>
+    <string name="settings_label_contact_email">Alert Destination</string>
+    <string name="settings_label_frequency">Heartbeat Frequency</string>
+    <string name="settings_label_hours">%1$d Hours</string>
+    <string name="settings_label_hours_val">Every %1$d Hours</string>
+    <string name="settings_label_notifications">Notifications</string>
+    <string name="settings_label_alarms">Exact Alarms</string>
+    <string name="settings_label_privacy">Privacy Policy</string>
+    <string name="settings_label_terms">Terms of Service</string>
+    <string name="settings_label_support">Contact Still Support</string>
+
+    <string name="settings_btn_save">Save Changes</string>
+    <string name="settings_btn_cancel">Cancel</string>
+    <string name="settings_btn_update_frequency">Update Frequency</string>
+    <string name="settings_btn_open">Open</string>
+    <string name="settings_btn_wipe">Wipe System Data</string>
+    <string name="settings_placeholder_edit">Enter value here</string>
+    <string name="settings_title_pulse">Safety Pulse</string>
+
+    <string name="settings_dialog_wipe_title">Are you sure?</string>
+    <string name="settings_dialog_wipe_desc">This will permanently delete your profile and stop all active safety timers.</string>
+    <string name="settings_status_ready">Ready</string>
+    <string name="settings_btn_fix">Fix</string>
+    <string name="settings_btn_edit">Edit</string>
+</resources>
