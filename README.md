@@ -1,6 +1,6 @@
 # 🧘 Still — Minimalist Passive Safety Timer
 <p align="center">
-  <img src="https://github.com/thezayin/still-safety-timer/blob/main/app/src/main/res/drawable/ic_still_logo.xml" width="200" height="200" alt="Still Logo">
+  <img src="https://github.com/thezayin/still-safety-timer/blob/main/app/src/main/res/drawable/logo.svg" width="200" height="200" alt="Still Logo">
 </p>
 
 <p align="center">
