@@ -34,8 +34,11 @@ fun TimerDial(
 ) {
     val remainingMillis = when (phase) {
         is TimerPhase.Active -> phase.remainingMillis
+        is TimerPhase.HalfTime -> phase.remainingMillis
         is TimerPhase.Warning -> phase.remainingMillis
         is TimerPhase.Critical -> phase.remainingMillis
+        is TimerPhase.Imminent -> phase.remainingMillis
+        is TimerPhase.LastMinute -> phase.remainingMillis
         else -> 0L
     }
 
@@ -48,9 +51,17 @@ fun TimerDial(
     )
 
     val targetColor = when (phase) {
-        is TimerPhase.Idle, is TimerPhase.Active -> AuraMint
+        is TimerPhase.Idle,
+        is TimerPhase.Active,
+        is TimerPhase.HalfTime -> AuraMint
+
         is TimerPhase.Warning -> AuraSunset
-        is TimerPhase.Critical, is TimerPhase.Abort, is TimerPhase.Expired -> AuraCoral
+
+        is TimerPhase.Critical,
+        is TimerPhase.Imminent,
+        is TimerPhase.LastMinute,
+        is TimerPhase.Abort,
+        is TimerPhase.Expired -> AuraCoral
     }
     val animatedColor by animateColorAsState(targetValue = targetColor, label = "DialColor")
 
@@ -72,9 +83,8 @@ fun TimerDial(
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = if (phase is TimerPhase.Idle) "${durationHours}h" else TimeFormatter.formatPhase(
-                    phase
-                ),
+                text = if (phase is TimerPhase.Idle) "${durationHours}h"
+                else TimeFormatter.formatPhase(phase),
                 fontSize = 48.sp,
                 fontWeight = FontWeight.Bold,
                 color = TextCloud

@@ -41,7 +41,8 @@ fun ProfileFieldContent(
     keyboardType: KeyboardType = KeyboardType.Text,
     onValueChange: (String) -> Unit,
     onBackClick: () -> Unit,
-    onContinueClick: () -> Unit
+    onContinueClick: () -> Unit,
+    bannerAdContent: @Composable () -> Unit = {}
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         ProfileBackground()
@@ -65,8 +66,7 @@ fun ProfileFieldContent(
                 .fillMaxSize()
                 .statusBarsPadding()
                 .navigationBarsPadding()
-                .padding(horizontal = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = 32.dp), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(100.dp))
 
@@ -111,7 +111,10 @@ fun ProfileFieldContent(
             }
 
             Spacer(modifier = Modifier.weight(1f))
-
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) { }
             PrimaryButton(
                 text = stringResource(R.string.profile_btn_continue),
                 onClick = onContinueClick,
@@ -120,6 +123,7 @@ fun ProfileFieldContent(
                     .fillMaxWidth()
                     .padding(bottom = 40.dp)
             )
+            bannerAdContent()
         }
     }
 }

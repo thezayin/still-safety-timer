@@ -19,6 +19,7 @@ sealed interface TimerIntent {
     data object AbortEmergency : TimerIntent
     data class UpdateDuration(val hours: Int) : TimerIntent
     data object OnSettingsClicked : TimerIntent
+    data object RefreshWarningState : TimerIntent
 }
 
 sealed interface TimerEffect {

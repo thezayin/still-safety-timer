@@ -37,7 +37,7 @@ fun ConsentContent(
     isLoading: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     onFinishClick: () -> Unit,
-    onDeclineClick: () -> Unit
+    onDeclineClick: () -> Unit, nativeAdContent: @Composable () -> Unit = {}
 ) {
     val uriHandler = LocalUriHandler.current
     val privacyPolicyUrl =
@@ -47,32 +47,42 @@ fun ConsentContent(
         StillAuraBackground()
 
         Scaffold(
-            containerColor = Color.Transparent, bottomBar = {
+            containerColor = Color.Transparent,
+            bottomBar = {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(24.dp)
                         .navigationBarsPadding(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    EntranceAnimation(delay = 1000) {
-                        PrimaryButton(
-                            text = buttonText,
-                            onClick = onFinishClick,
-                            enabled = isAccepted && !isLoading,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp, vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        EntranceAnimation(delay = 1000) {
+                            PrimaryButton(
+                                text = buttonText,
+                                onClick = onFinishClick,
+                                enabled = isAccepted && !isLoading,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        EntranceAnimation(delay = 1150) {
+                            GhostButton(
+                                label = "Decline & Exit",
+                                onClick = onDeclineClick,
+                                modifier = Modifier.fillMaxWidth(0.7f)
+                            )
+                        }
                     }
-                    Spacer(modifier = Modifier.height(12.dp))
-                    EntranceAnimation(delay = 1150) {
-                        GhostButton(
-                            label = "Decline & Exit",
-                            onClick = onDeclineClick,
-                            modifier = Modifier.fillMaxWidth(0.7f)
-                        )
-                    }
+
+                    nativeAdContent()
                 }
-            }) { padding ->
+            }
+        ) { padding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -111,52 +121,8 @@ fun ConsentContent(
                                 .clickable { uriHandler.openUri(privacyPolicyUrl) })
                     }
                 }
-                Spacer(modifier = Modifier.height(150.dp))
+                Spacer(modifier = Modifier.height(24.dp)) // Kept small to account for the taller bottom bar
             }
         }
-    }
-}
-
-@Preview(showSystemUi = true, name = "Consent - Unaccepted State")
-@Composable
-private fun ConsentContentUnacceptedPreview() {
-    SafetyNetTheme {
-        ConsentContent(
-            title = "THE SAFETY\nCONTRACT",
-            description = "Stillness is a commitment to your own safety. Please acknowledge our shared protocols.",
-            bullets = listOf(
-                "Encrypted and private location data.",
-                "Minimalist check-in prompts.",
-                "Secure emergency notifications."
-            ),
-            checkboxLabel = "I understand and accept these protocols.",
-            buttonText = "ENTER THE STILLNESS",
-            isAccepted = false,
-            isLoading = false,
-            onCheckedChange = {},
-            onFinishClick = {},
-            onDeclineClick = {})
-    }
-}
-
-@Preview(showSystemUi = true, name = "Consent - Accepted State")
-@Composable
-private fun ConsentContentAcceptedPreview() {
-    SafetyNetTheme {
-        ConsentContent(
-            title = "THE SAFETY\nCONTRACT",
-            description = "Stillness is a commitment to your own safety. Please acknowledge our shared protocols.",
-            bullets = listOf(
-                "Encrypted and private location data.",
-                "Minimalist check-in prompts.",
-                "Secure emergency notifications."
-            ),
-            checkboxLabel = "I understand and accept these protocols.",
-            buttonText = "ENTER THE STILLNESS",
-            isAccepted = true,
-            isLoading = false,
-            onCheckedChange = {},
-            onFinishClick = {},
-            onDeclineClick = {})
     }
 }

@@ -27,6 +27,9 @@ class ObserveTimerPhaseUseCase(
                 while (true) {
                     val now = timeProvider.currentTimeMillis()
                     val remaining = data.targetTimestamp - now
+                    val halfPoint = (data.targetTimestamp - data.startTimestamp) / 2
+                    val halfTimestamp = data.startTimestamp + halfPoint
+
                     val currentPhase = when {
                         remaining <= 0 -> {
                             val elapsedSinceExpiry = -remaining
@@ -39,8 +42,11 @@ class ObserveTimerPhaseUseCase(
                             }
                         }
 
-                        remaining <= 1800000L -> TimerPhase.Critical(remaining)
-                        remaining <= 7200000L -> TimerPhase.Warning(remaining)
+                        remaining <= 60_000L      -> TimerPhase.LastMinute(remaining)
+                        remaining <= 1_800_000L   -> TimerPhase.Imminent(remaining)
+                        remaining <= 3_600_000L   -> TimerPhase.Critical(remaining)
+                        remaining <= 21_600_000L  -> TimerPhase.Warning(remaining)
+                        now >= halfTimestamp       -> TimerPhase.HalfTime(remaining)
                         else -> TimerPhase.Active(remaining)
                     }
 

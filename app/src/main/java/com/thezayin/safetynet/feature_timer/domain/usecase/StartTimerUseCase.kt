@@ -31,8 +31,8 @@ class StartTimerUseCase(
 
         val durationHours = overrideHours ?: data.durationHours
         val start = timeProvider.currentTimeMillis()
-        val target = start + (durationHours * 3600000L)
-
+//        val target = start + (durationHours * 3600000L)
+        val target = start + (durationHours * 1500L)
         val alarmResult = hardwareManager.scheduleExactAlarms(target)
         if (alarmResult is DomainResult.Failure) return alarmResult
 

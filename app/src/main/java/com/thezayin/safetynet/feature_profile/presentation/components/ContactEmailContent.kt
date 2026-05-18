@@ -14,7 +14,8 @@ fun ContactEmailContent(
     state: ProfileState,
     onEmailChange: (String) -> Unit,
     onBack: () -> Unit,
-    onContinue: () -> Unit
+    onContinue: () -> Unit,
+    bannerAdContent: @Composable () -> Unit = {}
 ) {
     ProfileFieldContent(
         title = stringResource(R.string.profile_email_question),
@@ -28,7 +29,8 @@ fun ContactEmailContent(
         keyboardType = KeyboardType.Email,
         onValueChange = onEmailChange,
         onBackClick = onBack,
-        onContinueClick = onContinue
+        onContinueClick = onContinue,
+        bannerAdContent = bannerAdContent
     )
 }
 

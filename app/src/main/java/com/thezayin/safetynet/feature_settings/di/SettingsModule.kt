@@ -3,9 +3,11 @@ package com.thezayin.safetynet.feature_settings.di
 import com.thezayin.safetynet.feature_settings.data.repository.SettingsRepositoryImpl
 import com.thezayin.safetynet.feature_settings.data.source.SettingsDataSource
 import com.thezayin.safetynet.feature_settings.domain.repository.SettingsRepository
-import com.thezayin.safetynet.feature_settings.domain.usecase.*
+import com.thezayin.safetynet.feature_settings.domain.usecase.GetSupportEmailUseCase
+import com.thezayin.safetynet.feature_settings.domain.usecase.UpdateIntervalUseCase
+import com.thezayin.safetynet.feature_settings.domain.usecase.ValidateSettingsUseCase
+import com.thezayin.safetynet.feature_settings.domain.usecase.WipeAllDataUseCase
 import com.thezayin.safetynet.feature_settings.presentation.SettingsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 

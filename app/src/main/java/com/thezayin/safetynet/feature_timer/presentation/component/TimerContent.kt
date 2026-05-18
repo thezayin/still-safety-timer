@@ -38,7 +38,8 @@ fun TimerContent(
     onIntent: (TimerIntent) -> Unit,
     onShowDeactivateDialog: () -> Unit,
     onWarningClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    nativeAdContent: @Composable () -> Unit = {}
 ) {
     Scaffold(
         modifier = modifier, containerColor = TwilightBackground, bottomBar = {
@@ -65,7 +66,7 @@ fun TimerContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(vertical = 48.dp),
+                .padding(vertical = 25.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (state.isBatterySaverAlertVisible) {
@@ -154,6 +155,8 @@ fun TimerContent(
                     }
                 }, isCritical = state.phase is TimerPhase.Critical || isAbortPhase
             )
+            Spacer(modifier = Modifier.height(24.dp))
+            nativeAdContent()
         }
     }
 }
@@ -166,7 +169,13 @@ fun TimerContentPreview() {
             phase = TimerPhase.Idle,
             displayTime = "01:00:00",
             streakCount = 4,
-            isBatteryWarningActive = true,
-            isBatterySaverAlertVisible = true
-        ), onIntent = {}, onShowDeactivateDialog = {}, onWarningClick = {})
+            isBatteryWarningActive = false,
+            isBatterySaverAlertVisible = false
+        ),
+        onIntent = {},
+        onShowDeactivateDialog = {},
+        onWarningClick = {},
+        nativeAdContent = {
+
+        })
 }

@@ -14,10 +14,11 @@ import androidx.navigation.compose.navigation
 import com.thezayin.safetynet.feature_onboarding.presentation.consent.ConsentScreen
 import com.thezayin.safetynet.feature_onboarding.presentation.permissions.PermissionScreen
 import com.thezayin.safetynet.feature_onboarding.presentation.slides.SlidesScreen
+import com.thezayin.safetynet.feature_profile.presentation.ContactEmailScreen
+import com.thezayin.safetynet.feature_profile.presentation.ContactNameScreen
 import com.thezayin.safetynet.feature_profile.presentation.NameSetupScreen
 import com.thezayin.safetynet.feature_profile.presentation.ProfileReviewScreen
 import com.thezayin.safetynet.feature_profile.presentation.ProfileViewModel
-import com.thezayin.safetynet.feature_profile.presentation.ContactEmailScreen
 import com.thezayin.safetynet.feature_settings.presentation.SettingsScreen
 import com.thezayin.safetynet.feature_splash.SplashScreen
 import com.thezayin.safetynet.feature_splash.mvi.SplashEffect

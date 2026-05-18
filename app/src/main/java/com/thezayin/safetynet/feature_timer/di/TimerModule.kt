@@ -40,7 +40,7 @@ val timerModule = module {
 
     single<TimerRepository> { TimerRepositoryImpl(get(), get()) }
 
-    single<EmergencyDispatcher> { EmergencyDispatcherImpl(get()) }
+    single<EmergencyDispatcher> { EmergencyDispatcherImpl(get(), get()) }
 
     single<TimerHardwareManager> { TimerHardwareManagerImpl(androidContext(), get()) }
 

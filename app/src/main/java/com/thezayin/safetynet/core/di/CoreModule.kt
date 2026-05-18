@@ -20,7 +20,7 @@ import org.koin.dsl.module
 val coreModule = module {
 
     single<LocalLogger> {
-        AndroidLocalLogger()
+        AndroidLocalLogger(get())
     }
 
     single<TimeProvider> {

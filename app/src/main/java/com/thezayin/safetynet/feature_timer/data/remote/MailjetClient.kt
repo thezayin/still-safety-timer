@@ -3,6 +3,7 @@ package com.thezayin.safetynet.feature_timer.data.remote
 import com.thezayin.safetynet.core.domain.logger.LocalLogger
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -19,6 +20,11 @@ object MailjetClient {
                     isLenient = true
                     encodeDefaults = true
                 })
+            }
+
+            install(HttpRequestRetry) {
+                retryOnExceptionOrServerErrors(maxRetries = 3)
+                exponentialDelay()
             }
 
             install(Logging) {

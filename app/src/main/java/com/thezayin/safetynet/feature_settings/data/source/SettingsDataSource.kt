@@ -4,9 +4,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 class SettingsDataSource {
-    fun getSupportEmail(): Flow<String> = flowOf("support@thezayin.com")
+    fun getSupportEmail(): Flow<String> = flowOf("theblue.locks@gmail.com")
 
-    fun getPrivacyUrl(): Flow<String> = flowOf("https://thezayin.com/privacy")
+    fun getPrivacyUrl(): Flow<String> =
+        flowOf("https://stillsafety.blogspot.com/2026/05/privacy-policy.html")
 
-    fun getTermsUrl(): Flow<String> = flowOf("https://thezayin.com/terms")
+    fun getTermsUrl(): Flow<String> =
+        flowOf("https://stillsafety.blogspot.com/2026/05/terms-and-conditions.html")
 }

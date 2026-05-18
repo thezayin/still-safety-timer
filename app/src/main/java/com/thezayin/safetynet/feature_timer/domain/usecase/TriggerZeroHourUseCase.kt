@@ -11,7 +11,7 @@ class TriggerZeroHourUseCase(
 ) {
     operator fun invoke() {
         hardwareManager.enqueueEmergencyWorker()
-        notificationService.showZeroHourNotification()
+        notificationService.showZeroHourAlertOnce()
         feedbackService.triggerEmergencyVibration()
     }
 }

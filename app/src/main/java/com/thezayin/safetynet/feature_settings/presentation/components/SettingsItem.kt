@@ -36,7 +36,6 @@ fun SettingsItem(
             Text(
                 text = label,
                 style = AuraTypography.labelSmall,
-                color = AuraTypography.labelSmall.color.copy(alpha = 0.5f)
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
