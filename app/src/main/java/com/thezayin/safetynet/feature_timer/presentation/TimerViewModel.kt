@@ -65,6 +65,7 @@ class TimerViewModel(
             TimerIntent.OnSettingsClicked -> {
                 viewModelScope.launch { _effect.send(TimerEffect.NavigateToSettings) }
             }
+            TimerIntent.RefreshWarningState -> refreshBatteryWarningState()
         }
     }
 
@@ -116,9 +117,14 @@ class TimerViewModel(
 
     private fun refreshBatteryWarningState() {
         val isRestricted = !powerMonitor.isIgnoringBatteryOptimizations()
-        _state.update { it.copy(isBatteryWarningActive = isRestricted) }
+        val isBatterySaverOn = powerMonitor.isBatterySaverEnabled()
+        _state.update {
+            it.copy(
+                isBatteryWarningActive = isRestricted,
+                isBatterySaverAlertVisible = isBatterySaverOn
+            )
+        }
     }
-
     private fun observeTimerLogic() {
         observeTimerPhase()
             .onEach { newPhase ->

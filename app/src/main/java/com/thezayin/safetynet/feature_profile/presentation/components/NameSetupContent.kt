@@ -13,7 +13,8 @@ fun NameSetupContent(
     state: ProfileState,
     onNameChange: (String) -> Unit,
     onBack: () -> Unit,
-    onContinue: () -> Unit
+    onContinue: () -> Unit,
+    bannerAdContent: @Composable () -> Unit = {}
 ) {
     ProfileFieldContent(
         title = stringResource(R.string.profile_name_question),
@@ -26,7 +27,8 @@ fun NameSetupContent(
         isButtonEnabled = state.isUserNameValid,
         onValueChange = onNameChange,
         onBackClick = onBack,
-        onContinueClick = onContinue
+        onContinueClick = onContinue,
+        bannerAdContent = bannerAdContent
     )
 }
 

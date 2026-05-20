@@ -18,8 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.thezayin.safetynet.R
 import com.thezayin.safetynet.core.ui.components.GhostButton
+import com.thezayin.safetynet.core.ui.theme.SafetyNetTheme
 
 @Composable
 fun SettingsContent(
@@ -39,7 +41,8 @@ fun SettingsContent(
     onPrivacyClick: () -> Unit,
     onTermsClick: () -> Unit,
     onContactUs: () -> Unit,
-    onWipeData: () -> Unit
+    onWipeData: () -> Unit,
+    adContent: @Composable () -> Unit = { AdContainer() },
 ) {
     Scaffold(
         topBar = {
@@ -87,7 +90,7 @@ fun SettingsContent(
                 }
             }
 
-            item { AdContainer() }
+            item { adContent() }
 
             item {
                 SettingsSection(title = stringResource(R.string.settings_section_shield)) {
@@ -136,5 +139,32 @@ fun SettingsContent(
                 )
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SettingsContentPreview() {
+    SafetyNetTheme {
+        SettingsContent(
+            userName = "John Doe",
+            contactName = "Jane Smith",
+            contactEmail = "jane.smith@example.com",
+            interval = 4,
+            isNotificationsReady = true,
+            isAlarmsReady = false,
+            onBackClick = {},
+            onEditName = {},
+            onEditContactName = {},
+            onEditContactEmail = {},
+            onChangeInterval = {},
+            onFixNotification = {},
+            onFixAlarms = {},
+            onPrivacyClick = {},
+            onTermsClick = {},
+            onContactUs = {},
+            onWipeData = {},
+            adContent = {}
+        )
     }
 }

@@ -32,7 +32,8 @@ import com.thezayin.safetynet.feature_profile.presentation.mvi.ProfileState
 fun ProfileReviewContent(
     state: ProfileState,
     onBack: () -> Unit,
-    onConfirm: () -> Unit
+    onConfirm: () -> Unit,
+    bannerAdContent: @Composable () -> Unit = {}
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         ProfileBackground()
@@ -102,6 +103,8 @@ fun ProfileReviewContent(
                     .fillMaxWidth()
                     .padding(bottom = 40.dp)
             )
+
+            bannerAdContent()
         }
     }
 }
@@ -112,12 +115,13 @@ private fun PreviewReviewFull() {
     SafetyNetTheme {
         ProfileReviewContent(
             state = ProfileState(
-                userName = "Zayin Software",
+                userName = "John M.",
                 contactName = "Emergency Contact",
                 contactEmail = "alert@safety.net"
             ),
             onBack = {},
-            onConfirm = {}
+            onConfirm = {},
+            bannerAdContent = {}
         )
     }
 }

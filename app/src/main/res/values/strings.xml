@@ -160,7 +160,7 @@
     <string name="settings_section_shield">Shield Readiness</string>
     <string name="settings_section_support">Support &amp; Legal</string>
 
-    <string name="settings_label_name">Name</string>
+    <string name="settings_label_name">Settings</string>
     <string name="settings_label_contact_name">Contact Name</string>
     <string name="settings_label_contact_email">Alert Destination</string>
     <string name="settings_label_frequency">Heartbeat Frequency</string>

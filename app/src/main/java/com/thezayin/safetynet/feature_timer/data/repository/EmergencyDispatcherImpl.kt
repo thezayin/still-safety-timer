@@ -1,7 +1,9 @@
 package com.thezayin.safetynet.feature_timer.data.repository
 
+import com.thezayin.safetynet.BuildConfig
 import com.thezayin.safetynet.core.domain.error.AppError
 import com.thezayin.safetynet.core.domain.error.DomainResult
+import com.thezayin.safetynet.core.domain.logger.LocalLogger
 import com.thezayin.safetynet.feature_timer.data.remote.EmailContact
 import com.thezayin.safetynet.feature_timer.data.remote.MailjetMessage
 import com.thezayin.safetynet.feature_timer.data.remote.MailjetRequest
@@ -15,9 +17,11 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
+import org.koin.core.logger.Logger
 
 class EmergencyDispatcherImpl(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
+    private val logger: LocalLogger
 ) : EmergencyDispatcher {
 
     companion object {
@@ -31,7 +35,7 @@ class EmergencyDispatcherImpl(
         val requestBody = MailjetRequest(
             messages = listOf(
                 MailjetMessage(
-                    from = EmailContact("alerts@thezayin.com", "Still Safety System"),
+                    from = EmailContact("zainshahid4950@gmail.com", "Still Safety System"),
                     to = listOf(EmailContact(toEmail, toName)),
                     subject = "🚨 URGENT: Emergency Alert for $userName",
                     textPart = "EMERGENCY: $userName has failed to check in. Please contact them immediately.",
@@ -65,11 +69,19 @@ class EmergencyDispatcherImpl(
 
         return try {
             val response: HttpResponse = httpClient.post(MAILJET_URL) {
-                basicAuth("BuildConfig.MAILJET_API_KEY", "BuildConfig.MAILJET_SECRET_KEY")
+                basicAuth(BuildConfig.MAILJET_API_KEY, BuildConfig.MAILJET_SECRET_KEY)
                 contentType(ContentType.Application.Json)
                 setBody(requestBody)
             }
-
+            val responseBody = response.bodyAsText()
+            if (response.status.isSuccess()) {
+                logger.i("EmergencyEngine", "SUCCESS: Email sent!")
+                DomainResult.Success(Unit)
+            } else {
+                // 🔴 This will print the EXACT reason Mailjet rejected your email
+                logger.e("EmergencyEngine", "FAILURE: Code ${response.status.value}, Body: $responseBody")
+                DomainResult.Failure(AppError.Alert.NetworkFailure(response.status.value, responseBody))
+            }
             if (response.status.isSuccess()) {
                 DomainResult.Success(Unit)
             } else {

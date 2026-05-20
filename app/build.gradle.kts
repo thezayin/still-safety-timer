@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -17,14 +20,22 @@ android {
 
     defaultConfig {
         applicationId = "com.thezayin.safetynet"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 
+        val properties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            properties.load(FileInputStream(localPropertiesFile))
+        }
+
+        buildConfigField("String", "MAILJET_API_KEY", "\"${properties.getProperty("MAILJET_API_KEY") ?: ""}\"")
+        buildConfigField("String", "MAILJET_SECRET_KEY", "\"${properties.getProperty("MAILJET_SECRET_KEY") ?: ""}\"")
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -61,10 +72,12 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.firebase.analytics)
+    implementation(libs.google.ump)
     implementation(libs.firebase.config)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.inappmessaging)
@@ -79,6 +92,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.koin.android)
+    implementation(libs.androidx.javascriptengine)
     implementation(libs.koin.compose)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)

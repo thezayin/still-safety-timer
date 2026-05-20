@@ -17,6 +17,7 @@ import com.thezayin.safetynet.core.domain.error.DomainResult
 import com.thezayin.safetynet.core.domain.logger.LocalLogger
 import com.thezayin.safetynet.feature_timer.data.worker.EmergencyAlertWorker
 import com.thezayin.safetynet.feature_timer.domain.repository.TimerHardwareManager
+import com.thezayin.safetynet.feature_timer.presentation.service.TimerService
 import java.util.concurrent.TimeUnit
 
 class TimerHardwareManagerImpl(
@@ -37,17 +38,19 @@ class TimerHardwareManagerImpl(
         private const val ALARM_REQUEST_CODE = 999
     }
 
+    // In TimerHardwareManagerImpl.kt
     override fun startSafetyService(targetTimestamp: Long): DomainResult<Unit> {
-        val intent = Intent(ACTION_START_SERVICE).apply {
-            setPackage(appContext.packageName)
-            putExtra("EXTRA_TARGET_TIMESTAMP", targetTimestamp)
-        }
         return try {
-            ContextCompat.startForegroundService(appContext, intent)
-            logger.i(TAG, "Safety Service start commanded.")
+            val intent = Intent(appContext, TimerService::class.java)
+            // Add this line to force the OS to accept it as a foreground request
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                appContext.startForegroundService(intent)
+            } else {
+                appContext.startService(intent)
+            }
             DomainResult.Success(Unit)
         } catch (e: Exception) {
-            logger.e(TAG, "Failed to start service", e)
+            logger.e(TAG, "Failed to start service: ${e.message}")
             DomainResult.Failure(AppError.Timer.SchedulingFailed(e))
         }
     }
@@ -91,7 +94,6 @@ class TimerHardwareManagerImpl(
 
     override fun enqueueEmergencyWorker(): DomainResult<Unit> {
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
         val alertRequest = OneTimeWorkRequestBuilder<EmergencyAlertWorker>()
@@ -110,7 +112,10 @@ class TimerHardwareManagerImpl(
     }
 
     private fun getZeroHourPendingIntent(): PendingIntent {
-        val intent = Intent(ACTION_ZERO_HOUR).apply { setPackage(appContext.packageName) }
+        val intent = Intent(appContext, com.thezayin.safetynet.feature_timer.presentation.receiver.TimerAlarmReceiver::class.java).apply {
+            action = ACTION_ZERO_HOUR
+        }
+
         return PendingIntent.getBroadcast(
             appContext,
             ALARM_REQUEST_CODE,

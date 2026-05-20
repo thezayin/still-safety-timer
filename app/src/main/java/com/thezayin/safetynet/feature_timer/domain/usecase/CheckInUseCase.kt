@@ -23,7 +23,7 @@ class CheckInUseCase(
         }
 
         val now = timeProvider.currentTimeMillis()
-        val newTarget = now + (data.durationHours * 3600000L)
+       val newTarget = now + (data.durationHours * 3600000L)
         val updatedHistory = (data.history + now).takeLast(100)
         val dbResult1 = repository.recordCheckIn(now, updatedHistory)
         val dbResult2 = repository.setTimerActive(isActive = true, start = now, target = newTarget)

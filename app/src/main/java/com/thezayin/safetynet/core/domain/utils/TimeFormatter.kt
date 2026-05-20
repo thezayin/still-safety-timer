@@ -12,9 +12,12 @@ object TimeFormatter {
         return when (phase) {
             is TimerPhase.Idle -> "00:00:00"
             is TimerPhase.Active -> formatCountdown(phase.remainingMillis)
+            is TimerPhase.HalfTime -> formatCountdown(phase.remainingMillis)
             is TimerPhase.Warning -> formatCountdown(phase.remainingMillis)
             is TimerPhase.Critical -> formatCountdown(phase.remainingMillis)
-            is TimerPhase.Abort -> formatAbortSeconds(phase.abortSecondsRemaining)
+            is TimerPhase.Imminent -> formatCountdown(phase.remainingMillis)
+            is TimerPhase.LastMinute -> formatCountdown(phase.remainingMillis)
+            is TimerPhase.Abort -> formatAbortSeconds(phase.secondsRemaining)
             is TimerPhase.Expired -> "00:00:00"
         }
     }

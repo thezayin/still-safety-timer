@@ -3,13 +3,17 @@ package com.thezayin.safetynet.feature_onboarding.presentation.slides.components
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +32,9 @@ fun SlidesContent(
     pagerState: PagerState,
     isLastPage: Boolean,
     onPageChanged: (Int) -> Unit,
-    onNextClick: () -> Unit
+    onNextClick: () -> Unit,
+
+    nativeAdContent: @Composable () -> Unit = {}
 ) {
     LaunchedEffect(pagerState.currentPage) {
         onPageChanged(pagerState.currentPage)
@@ -40,12 +46,20 @@ fun SlidesContent(
 
             Scaffold(
                 containerColor = Color.Transparent, bottomBar = {
-                    OnboardingFooter(
-                        pageCount = pages.size,
-                        currentPage = pagerState.currentPage,
-                        isLastPage = isLastPage,
-                        onNextClick = onNextClick
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .navigationBarsPadding(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        OnboardingFooter(
+                            pageCount = pages.size,
+                            currentPage = pagerState.currentPage,
+                            isLastPage = isLastPage,
+                            onNextClick = onNextClick
+                        )
+                        nativeAdContent()
+                    }
                 }) { padding ->
                 OnboardingPager(
                     pages = pages, pagerState = pagerState, modifier = Modifier.padding(padding)

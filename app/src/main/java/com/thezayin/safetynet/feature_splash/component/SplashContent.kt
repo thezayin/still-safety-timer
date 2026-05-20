@@ -14,7 +14,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +35,10 @@ import com.thezayin.safetynet.core.ui.theme.SplashBlack
 import com.thezayin.safetynet.core.ui.theme.SplashDeepTeal
 
 @Composable
-fun SplashContent(isLoading: Boolean) {
+fun SplashContent(
+    isLoading: Boolean,
+    nativeAdContent: @Composable () -> Unit = {}
+) {
     val infiniteTransition = rememberInfiniteTransition(label = "SplashPulse")
 
     val scale by infiniteTransition.animateFloat(
@@ -55,34 +60,57 @@ fun SplashContent(isLoading: Boolean) {
                 brush = Brush.radialGradient(
                     colors = listOf(SplashDeepTeal, SplashBlack)
                 )
-            ), contentAlignment = Alignment.Center
+            )
     ) {
-        AnimatedVisibility(
-            visible = isLoading,
-            enter = fadeIn(animationSpec = tween(1000)),
-            exit = fadeOut(animationSpec = tween(600))
+        // --- 1. CENTERED LOGO ---
+        Box(
+            modifier = Modifier.align(Alignment.Center),
+            contentAlignment = Alignment.Center
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(350.dp)
-                    .offset(y = (-40).dp)
-                    .drawBehind {
-                        drawCircle(
-                            brush = Brush.radialGradient(
-                                colors = listOf(
-                                    AuraMint.copy(alpha = 0.12f * glowIntensity), Color.Transparent
-                                )
-                            ), radius = (size.width / 1.8f) * glowIntensity
-                        )
-                    }) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_still_logo),
-                    contentDescription = "SafetyNet Logo",
+            AnimatedVisibility(
+                visible = isLoading,
+                enter = fadeIn(animationSpec = tween(1000)),
+                exit = fadeOut(animationSpec = tween(600))
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(170.dp)
-                        .scale(scale)
-                )
+                        .size(350.dp)
+                        .offset(y = (-40).dp)
+                        .drawBehind {
+                            drawCircle(
+                                brush = Brush.radialGradient(
+                                    colors = listOf(
+                                        AuraMint.copy(alpha = 0.12f * glowIntensity), Color.Transparent
+                                    )
+                                ), radius = (size.width / 1.8f) * glowIntensity
+                            )
+                        }) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_still_logo),
+                        contentDescription = "SafetyNet Logo",
+                        modifier = Modifier
+                            .size(170.dp)
+                            .scale(scale)
+                    )
+                }
+            }
+        }
+
+        // --- 2. BOTTOM NATIVE AD CONTAINER ---
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .padding(bottom = 32.dp, start = 16.dp, end = 16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            AnimatedVisibility(
+                visible = isLoading,
+                enter = fadeIn(animationSpec = tween(1000)),
+                exit = fadeOut(animationSpec = tween(600))
+            ) {
+                nativeAdContent()
             }
         }
     }
